@@ -1,0 +1,25 @@
+/* Header container: spaces the whole header horizontally */
+.header-container {
+  display: flex;
+  justify-content: space-evenly; /* space between logo and menu (if any) */
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 30px; 
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.menu li:hover {
+  color: #00bfff;
+}
