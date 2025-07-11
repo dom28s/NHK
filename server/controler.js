@@ -1,5 +1,6 @@
 import pool from "./database.js";
-import bcrypt from "bcrypt";
+import bcrypt, { compareSync } from "bcrypt";
+import jwt from 'jsonwebtoken'
 
 // https://www3.nhk.or.jp/news/easy/news-list.json?_=1750935545574
 
@@ -12,10 +13,10 @@ const controler = {
   singupCheck: async (req, res) => {
     const { username, email, password } = req.body;
     const saltRounds = 10; // กำหนดความยากในการ hash
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("--------");
+    // console.log("Username:", username);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
+    // console.log("--------");
 
     try {
       const [userCheck] = await pool.execute(
@@ -43,14 +44,14 @@ const controler = {
         }
       }
     } catch (err) {
-      console.error(`error in checkDb  : ${err}`);
+      console.error(`error in checkDb  : ${err.massage}`);
     }
   },
 
   loginCheck: async (req, res) => {
     const { username, password } = req.body;
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
     try {
       const [user] = await pool.execute(
         "SELECT * FROM users WHERE username = ?",
@@ -64,35 +65,75 @@ const controler = {
           user[0].password
         );
         if (isPasswordValid) {
-          return res.send({ isUser: true, isPassword: true });
+
+          const token = jwt.sign(
+            { id: user[0].id, username: user[0].username },
+            'your-secret-key',
+            { expiresIn: '1h' }
+          );
+          return res.send({ isUser: true, isPassword: true, token });
         } else {
           return res.send({ isUser: true, isPassword: false });
         }
       }
     } catch (err) {
-      console.error(`error in login : ${err}`);
+      console.error(`error in login : ${err.massage}`);
+    }
+  },
+  getNewstitle: async (req, res) => {
+    try {
+      const [rows] = await pool.execute('SELECT news_image_url, news_url, news_title_ruby FROM news WHERE has_image = 1 ORDER BY news_id DESC;');
+
+      const newsDetails = await Promise.all(
+        rows.map(row => controler.getNewsFromUrl(row.news_url))
+      );
+
+
+      const news = rows.map((row, i) => ({
+        newsTitle: row.news_title_ruby,
+        newsPic: row.news_image_url,
+        newsContent: newsDetails[i], // ถ้าต้องการเก็บข้อมูลบทความด้วย
+      }));
+
+      res.send(news);
+    } catch (err) {
+      console.error('error in getNewstitle :', err);
+      res.status(500).send('Internal Server Error');
     }
   },
 
-  getNewstitle :async (req,res)=>{
-    try{
-      const [rows] = await pool.execute('SELECT news_title_ruby FROM news ')
-      console.log(rows[0])
-      res.send(rows)
-    }catch(err){
-      console.error('error in getNewstitle :',err)
-    }
-  },  
+  getNewsFromUrl: async (url) => {
+    try {
+      if (typeof url !== 'string') {
+        console.error('Invalid URL:', url);
+        return null;
+      }
+      const response = await fetch(url);
+      const html = await response.text();
 
-  getNewsFromUrl : async(req,res)=>{
-    const respon = await fetch('https://www3.nhk.or.jp/news/easy/ne2025070711398/ne2025070711398.html')
-    let news = await respon.text()
-    // console.log(news)
-    news = news.split('<div class="article-body" id="js-article-body">')
-    news = news[1].split('</div>')
-    news = news[0].replace(/[\n\t]/g, '').replace(/\s\s+/g, ' ')
-    console.log(news)
-    res.send({bodyhtml : news})
+      if (!html) {
+        console.error("Empty HTML from:", url);
+        return null;
+      }
+
+      let news = html.split('<div class="article-body" id="js-article-body">');
+      if (!news[1]) {
+        return null;
+      }
+
+      news = news[1].split('</div>');
+      if (!news[0]) {
+        console.error('Closing div tag not found');
+        return null;
+      }
+
+      news = news[0].replace(/[\n\t]/g, '').replace(/\s\s+/g, ' ');
+      return news;
+
+    } catch (err) {
+      console.error(`error in getNewsFromUrl ${err.massage}`);
+      return null;
+    }
   },
 
   updateNews: async (req, res) => {
@@ -112,8 +153,8 @@ const controler = {
               [html[0][data][l].news_id]
             );
             if (rows.length === 0) {
-              console.log("update ");
-              console.log(html[0][data][l].news_id)
+              // console.log("update ");
+              // console.log(html[0][data][l].news_id)
               await pool.execute(
                 "INSERT INTO news (news_id, news_rank, news_title, news_title_ruby, news_url, has_image, news_image_url, pub_date )VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 [
@@ -135,7 +176,7 @@ const controler = {
         }
       }
     } catch (err) {
-      console.error(`error in updateNews : ${err}`);
+      console.error(`error in updateNews : ${err.massage}`);
     }
   },
 

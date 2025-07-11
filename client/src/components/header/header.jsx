@@ -6,9 +6,12 @@ export default function Header() {
 
   return (
     <div className="header-container">
+      <div className="logo">
+        Token
+      </div>
       <ul className="menu">
         <li onClick={() => navigate("/favorite")}>FAVORITE</li>
-        <li onClick={() => navigate("/home")}>NEWS</li>
+        <li onClick={() => navigate("/news")}>NEWS</li>
         <li onClick={() => navigate("/chat")}>CHAT</li>
       </ul>
     </div>

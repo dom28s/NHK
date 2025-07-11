@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './signup.css'
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,7 +8,7 @@ export default function Signup() {
 
 
   async function signupCheck() {
-    if(!email && !username && !password ){
+    if (!email && !username && !password) {
       alert('enter email , username , password')
       return
     }
@@ -26,25 +26,21 @@ export default function Signup() {
   }
 
   return (
-    <div>
-      <h1>Signup</h1>
+    <div className="main-signup">
+      <div className="signup-card">
+        <h1>Signup</h1>
 
-      <p>Email<input 
-      type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required /></p>
+        <div className="signup-input">
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 
-      <p>Username<input
-        type="text"
-        onChange={(e) => setUsername(e.target.value)}
-        required /></p>
+        </div>
 
-      <p>Password<input type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        required /></p>
+        <button onClick={signupCheck}>Signup</button>
 
-      <button onClick={signupCheck}>Signup</button>
+
+      </div>
     </div>
   );
 }

@@ -1,0 +1,26 @@
+.card{
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: 1px solid rgb(231, 231, 231);
+    
+}
+
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    max-height: 800px;
+    height: 50%;
+    width:60%;
+    border: 1px solid red;
+}
+
+.title{
+    border: 1px solid red;
+    margin: 1rem;
+}
