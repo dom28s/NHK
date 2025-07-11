@@ -1,3 +1,7 @@
 .main-news{
     color: white;
 }
+
+li{
+    list-style: none;
+}

@@ -1,6 +1,6 @@
 import pool from "./database.js";
 import bcrypt, { compareSync } from "bcrypt";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
 // https://www3.nhk.or.jp/news/easy/news-list.json?_=1750935545574
 
@@ -65,11 +65,10 @@ const controler = {
           user[0].password
         );
         if (isPasswordValid) {
-
           const token = jwt.sign(
             { id: user[0].id, username: user[0].username },
-            'your-secret-key',
-            { expiresIn: '1h' }
+            "your-secret-key",
+            { expiresIn: "1h" }
           );
           return res.send({ isUser: true, isPassword: true, token });
         } else {
@@ -82,12 +81,18 @@ const controler = {
   },
   getNewstitle: async (req, res) => {
     try {
-      const [rows] = await pool.execute('SELECT news_image_url, news_url, news_title_ruby FROM news WHERE has_image = 1 ORDER BY news_id DESC;');
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const offset = (page - 1) * limit;
 
-      const newsDetails = await Promise.all(
-        rows.map(row => controler.getNewsFromUrl(row.news_url))
+      const [rows] = await pool.execute(
+        "SELECT news_image_url, news_url, news_title_ruby FROM news WHERE has_image = 1 ORDER BY news_id DESC LIMIT ? OFFSET ?;",
+        [limit, offset]
       );
 
+      const newsDetails = await Promise.all(
+        rows.map((row) => controler.getNewsFromUrl(row.news_url))
+      );
 
       const news = rows.map((row, i) => ({
         newsTitle: row.news_title_ruby,
@@ -97,15 +102,15 @@ const controler = {
 
       res.send(news);
     } catch (err) {
-      console.error('error in getNewstitle :', err);
-      res.status(500).send('Internal Server Error');
+      console.error("error in getNewstitle :", err);
+      res.status(500).send("Internal Server Error");
     }
   },
 
   getNewsFromUrl: async (url) => {
     try {
-      if (typeof url !== 'string') {
-        console.error('Invalid URL:', url);
+      if (typeof url !== "string") {
+        console.error("Invalid URL:", url);
         return null;
       }
       const response = await fetch(url);
@@ -121,15 +126,14 @@ const controler = {
         return null;
       }
 
-      news = news[1].split('</div>');
+      news = news[1].split("</div>");
       if (!news[0]) {
-        console.error('Closing div tag not found');
+        console.error("Closing div tag not found");
         return null;
       }
 
-      news = news[0].replace(/[\n\t]/g, '').replace(/\s\s+/g, ' ');
+      news = news[0].replace(/[\n\t]/g, "").replace(/\s\s+/g, " ");
       return news;
-
     } catch (err) {
       console.error(`error in getNewsFromUrl ${err.massage}`);
       return null;
