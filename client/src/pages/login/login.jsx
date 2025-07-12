@@ -22,9 +22,8 @@ export default function Login() {
       const data = await response.json()
       if (data.isUser && data.isPassword) {
         localStorage.setItem('token', data.token);
-        navigate('/home');
-        console.log('in home')
-        console.log('in home')
+        navigate('/news');
+     
       }
     }
     catch (err) {

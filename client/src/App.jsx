@@ -9,6 +9,7 @@ import Chat from './pages/chat/chat.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import './App.css'
 import News from './pages/news/news.jsx';
+import NewsDetail from './pages/newsDetail/newsDetail.jsx';
 
 export default function App() {
   const navigate = useNavigate();
@@ -37,6 +38,9 @@ export default function App() {
         <Route path='/' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
 
+        <Route path='/newsDetail' element={<PrivateRoute>
+          <NewsDetail />
+        </PrivateRoute>} />
         <Route path='/news' element={<PrivateRoute>
           <News />
         </PrivateRoute>} />

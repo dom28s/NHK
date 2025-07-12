@@ -1,38 +1,45 @@
-import "./news.css";
-import { useState } from "react";
-import { useEffect, useRef  } from "react";
+import React, { useEffect, useState } from 'react'
+import './news.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function News() {
-  const limit = 20;
-  const [allNews, setAllNews] = useState([]);
-  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const fetchNewsContent = async () => {
-      const respone = await fetch(
-        `http://localhost:3000/getNewsTitle?page=${page}&limit=${limit}`
-      );
-      const data = await respone.json();
-      setAllNews((prev) => [...prev, ...data]);
-      console.log("d");
-    };
+    const limit = 20
+    const [newsContent, setNewsContent] = useState([])
+    const [newsCount, setNewsCount] = useState(1)
+    const navigate = useNavigate()
 
-    fetchNewsContent();
-  }, [page]);
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(`http://localhost:3000/getNews?newsCount=${newsCount}&limit=${limit}`, {
+                method: "GET",
+            });
+            const data = await response.json()
+            console.log(data)
+            setNewsContent((prev) => [...prev, ...data])
+            console.log('d')
+        }
+        
+        fetchData()
+    }, [newsCount])
 
-  return (
-    <div className="main-news">
-      <ul className="news-list">
-        {allNews.map((e, i) => {
-          return (
-            <div key={i} className="news-detail-card">
-              <img src={e.newsPic} alt="" width={100} />
-              <p key={i} dangerouslySetInnerHTML={{ __html: e.newsTitle }}></p>
+    return (
+        <div className="main-news">
+            <div className="news-list">
+                {newsContent.map((e, i) => {
+                    return (
+                        <div onClick={()=>navigate('/newsDetail',{ state: e })} className="news-list-card">
+                            <img className="news-image" src={e.newsPic} alt="not found" />
+                            <p dangerouslySetInnerHTML={{__html: e.newsTitle}}></p>
+
+                        </div>
+                    )
+                })}
+
             </div>
-          );
-        })}
-      </ul>
-      <button onClick={() => setPage((prev) => prev + 1)}>more</button>
-    </div>
-  );
+            <button onClick={() => setNewsCount(prev => prev + 1)}>more</button>
+        </div>
+    )
 }
+
+

@@ -1,20 +1,32 @@
 .main-news{
     color: white;
-    border: 1px solid red;
     display: flex;
+    width: 100%;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.news-list-card{
-
-    border: 1px solid rgb(177, 9, 143);
-}
 
 .news-list{
+    padding: 1rem;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20%;
-    grid-gap: 15px;
-    border: 1px solid rgb(202, 233, 196);
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    
+}
 
+.news-list-card{
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.news-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* ป้องกันภาพบิดเบี้ยว */
+  border-radius: 8px;   /* ทำให้มุมโค้ง */
 }

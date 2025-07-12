@@ -79,14 +79,14 @@ const controler = {
       console.error(`error in login : ${err.massage}`);
     }
   },
-  getNewstitle: async (req, res) => {
+  getNews: async (req, res) => {
     try {
-      const page = parseInt(req.query.page) || 1;
+      const page = parseInt(req.query.newsCount) || 1;
       const limit = parseInt(req.query.limit) || 20;
       const offset = (page - 1) * limit;
 
       const [rows] = await pool.execute(
-        "SELECT news_image_url, news_url, news_title_ruby FROM news WHERE has_image = 1 ORDER BY news_id DESC LIMIT ? OFFSET ?;",
+        "SELECT news_title_ruby,news_url,news_image_url FROM news WHERE has_image =1 ORDER BY news_id DESC LIMIT ? OFFSET ?;",
         [limit, offset]
       );
 
@@ -94,10 +94,12 @@ const controler = {
         rows.map((row) => controler.getNewsFromUrl(row.news_url))
       );
 
+      console.log(newsDetails.length)
+
       const news = rows.map((row, i) => ({
         newsTitle: row.news_title_ruby,
         newsPic: row.news_image_url,
-        newsContent: newsDetails[i], // ถ้าต้องการเก็บข้อมูลบทความด้วย
+        newsContent : newsDetails[i]
       }));
 
       res.send(news);
