@@ -1,26 +1,44 @@
-.card{
-    color: aliceblue;
+.main-home{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    width: 100%;
+    color: aliceblue;
     align-items: center;
     height: 100vh;
-    border: 1px solid rgb(231, 231, 231);
+}
+.content-card{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1000px;
+    padding: 1rem;
+    gap: 1rem;
+      box-sizing: border-box;  /* ป้องกัน padding ล้น */
     
 }
 
-.image{
+.kanna-card{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 800px;
-    max-height: 800px;
-    height: 50%;
-    width:60%;
-    border: 1px solid red;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
 }
 
-.title{
-    border: 1px solid red;
-    margin: 1rem;
+.news-card{
+    width: 100%;
+    border: 1px solid pink;
+    
+}
+
+.hira-card{
+    
+    border-radius: 5px;
+    border: 1px solid pink;
+    height: 100%;
+}
+.kata-card{
+    border-radius: 5px;
+    border: 1px solid pink;
+    
+    height: 100%;
 }

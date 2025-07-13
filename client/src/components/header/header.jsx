@@ -11,7 +11,7 @@ export default function Header() {
       </div>
       <ul className="menu">
         <li onClick={() => navigate("/favorite")}>FAVORITE</li>
-        <li onClick={() => navigate("/news")}>NEWS</li>
+        <li onClick={() => navigate("/home")}>HOME</li>
         <li onClick={() => navigate("/chat")}>CHAT</li>
       </ul>
     </div>

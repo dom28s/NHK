@@ -22,7 +22,7 @@ export default function Login() {
       const data = await response.json()
       if (data.isUser && data.isPassword) {
         localStorage.setItem('token', data.token);
-        navigate('/news');
+        navigate('/home');
      
       }
     }

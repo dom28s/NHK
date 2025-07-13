@@ -10,6 +10,8 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import './App.css'
 import News from './pages/news/news.jsx';
 import NewsDetail from './pages/newsDetail/newsDetail.jsx';
+import Hiragana from './pages/hiragana/hiragana.jsx';
+import Katakana from './pages/katakana/katakana.jsx';
 
 export default function App() {
   const navigate = useNavigate();
@@ -52,6 +54,12 @@ export default function App() {
         </PrivateRoute>} />
         <Route path='/chat' element={<PrivateRoute>
           <Chat />
+        </PrivateRoute>} />
+        <Route path='/hira' element={<PrivateRoute>
+          <Hiragana />
+        </PrivateRoute>} />
+        <Route path='/kata' element={<PrivateRoute>
+          <Katakana />
         </PrivateRoute>} />
       </Routes>
 
