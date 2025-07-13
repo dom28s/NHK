@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
-
 export function Home() {
 
   const navigate = useNavigate()
@@ -12,10 +11,10 @@ export function Home() {
           <h1>NEWS</h1>
         </div>
         <div className="kanna-card">
-          <div onClick={()=>navigate('/hira')} className="hira-card">
+          <div onClick={()=>navigate('/hira')} className="kata-hira-card">
             <h3>hira</h3>
           </div>
-          <div onClick={()=>navigate('/kata')} className="kata-card">
+          <div onClick={()=>navigate('/kata')} className="kata-hira-card">
             <h3>ka</h3>
           </div>
         </div>

@@ -5,6 +5,8 @@
     color: aliceblue;
     align-items: center;
     height: 100vh;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* เลือก Font ที่ Modern */
+
 }
 .content-card{
     display: flex;
@@ -18,6 +20,8 @@
 }
 
 .kanna-card{
+    background-color: #2B2B2B;
+    border: 1px solid #333333;
     display: flex;
     flex-direction: column;
     width: 100%;

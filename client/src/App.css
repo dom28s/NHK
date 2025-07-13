@@ -1,6 +1,11 @@
 .normal-page {
-  background-color: #090909;
-  min-height: 100vh;
+  /* background-color: #1A1A1A;
+  min-height: 100vh; */
+
+  background-image: url('./assets/bg-center.png'); /* Relative to CSS file location */
+  background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 }
 html body{
   margin: 0;

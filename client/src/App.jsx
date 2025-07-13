@@ -12,6 +12,8 @@ import News from './pages/news/news.jsx';
 import NewsDetail from './pages/newsDetail/newsDetail.jsx';
 import Hiragana from './pages/hiragana/hiragana.jsx';
 import Katakana from './pages/katakana/katakana.jsx';
+import bgPic from './assets/bg-center.png';
+
 
 export default function App() {
   const navigate = useNavigate();
