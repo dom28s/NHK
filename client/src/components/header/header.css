@@ -1,9 +1,18 @@
 .header-container{
+  color: aliceblue;
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.header{
   display: flex;
   justify-content: space-between;
+  width: 95%;
   /* border: 1px solid red; */
-  color: white;
-  font-size: 16px;
+
 }
 
 .logo{
@@ -19,20 +28,24 @@
 .menu{
  display: flex;
  flex-direction: row;
- justify-content: fl;
+ justify-content: flex-end;
  align-items: center;
  border-radius: 12px;
  /* border: 1px dotted red; */
- margin-right:1rem ;
  padding: 0;
+ width: 40%;
 }
 
 
 
 .menu li{
+  /* border: 1px dotted red; */
+  background-color: #808080;
   display: flex;
   padding: 1rem;
   list-style: none;
+  border-radius: 20px;
+  margin-left: 5%;
 }
 
 @media (max-width : 420px){

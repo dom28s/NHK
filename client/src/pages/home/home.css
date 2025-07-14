@@ -1,21 +1,22 @@
-.main-home{
+.main-home {
     display: flex;
     flex-direction: column;
     width: 100%;
     color: aliceblue;
     align-items: center;
     height: 100vh;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* เลือก Font ที่ Modern */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
 }
-.content-card{
+
+/* .content-card{
     display: flex;
     flex-direction: row;
     width: 100%;
     max-width: 1000px;
     padding: 1rem;
     gap: 1rem;
-      box-sizing: border-box;  /* ป้องกัน padding ล้น */
+      box-sizing: border-box;  
     
 }
 
@@ -45,4 +46,85 @@
     border: 1px solid pink;
     
     height: 100%;
+} */
+
+
+
+
+/* news design */
+
+.banner-card {
+    position: relative;
+    width: 95%;
+    height: 40%;
+    background: #595959;
+    border-radius: 20px;
+}
+
+.chat-button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 120px;
+    height: 120px;
+    background-color: #A60815;
+    border-radius: 50%;
+    border: 1.5rem solid #262626;
+}
+
+
+.content-box {
+    display: flex;
+    justify-self: left;
+    height: 50%;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.left-content {
+    width: 60%;
+}
+
+
+.right-content {
+    margin-top: 2rem;
+    display: grid;
+    width: 50%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        'news-card hira-card'
+        'news-card kata-card';
+    gap: 2rem;
+}
+
+
+.card-box {
+    border-radius: 15px;
+    background-color: #595959;
+    border: 1px solid red;
+    display: flex;
+}
+
+.news-card {
+    border-radius: 15px;
+    background-color: #595959;
+    grid-area: news-card;
+}
+
+.hira-card {
+    grid-area: hira-card;
+}
+
+.kata-card {
+    grid-area: kata-card;
+}
+
+.kanna-image{
+    border: 1px solid red;
+    width: 40%;
+}
+.kanna-detail{
+    border: 1px solid red;
+
 }
