@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom'
-import './NewsDetail.css'
 
 export default function NewsDetail() {
   const locate = useLocation()

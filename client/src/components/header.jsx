@@ -1,22 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import './Header.css';
 
 export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="header-container">
-      <div className="header">
-        <div className="logo">
+    <div className="flex flex-row w-full justify-between items-center p-5">
+      <div className="">
           Token
         </div>
-        <ul className="menu">
+        <ul className="flex flex-row space-x-5">
           <li onClick={() => navigate("/favorite")}>FAVORITE</li>
           <li onClick={() => navigate("/home")}>HOME</li>
           <li onClick={() => navigate("/chat")}>CHAT</li>
         </ul>
-
-      </div>
     </div>
   );
 }

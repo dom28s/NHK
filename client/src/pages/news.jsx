@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './news.css'
 import { useNavigate } from 'react-router-dom'
 
 export default function News() {

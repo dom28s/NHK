@@ -1,4 +1,3 @@
-import './hiragana.css'
 
 export default function Hiragana(){
     return(
