@@ -39,10 +39,15 @@ export default function App() {
 
 
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
+        {/* <Route path='/' element={<Login />} />
+        <Route path='/signup' element={<Signup />} /> */}
+        <Route path='/' element={<Home />} />
+        <Route path='/favorite' element={ <Favorite/>}/>
+        <Route path='/chat' element={<Chat />} />
+        <Route path='/hira' element={<Hiragana />} />
+        <Route path='/kata' element={ <Katakana />} />
 
-        <Route path='/newsDetail' element={<PrivateRoute>
+        {/* <Route path='/newsDetail' element={<PrivateRoute>
           <NewsDetail />
         </PrivateRoute>} />
         <Route path='/news' element={<PrivateRoute>
@@ -62,7 +67,7 @@ export default function App() {
         </PrivateRoute>} />
         <Route path='/kata' element={<PrivateRoute>
           <Katakana />
-        </PrivateRoute>} />
+        </PrivateRoute>} /> */}
       </Routes>
 
 

@@ -8,7 +8,6 @@ export function Home() {
   const navigate = useNavigate()
   return (
 <Layout>
-<h1>dd</h1>
   </Layout>  
   );
 }
