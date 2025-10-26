@@ -7,9 +7,13 @@ export function Home() {
 
   const navigate = useNavigate()
   return (
-<Layout>
-  </Layout>  
+    <Layout>
+      <div className=" w-full h-full p-4">
+        <div className="border w-full h-[250px] rounded-xl">
+
+        </div>
+      </div>
+    </Layout>
   );
 }
 
- 
