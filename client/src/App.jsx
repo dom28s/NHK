@@ -12,7 +12,6 @@ import News from './pages/news.jsx';
 import NewsDetail from './pages/newsDetail.jsx';
 import Hiragana from './pages/hiragana.jsx';
 import Katakana from './pages/katakana.jsx';
-import bgPic from './assets/bg-center.png';
 
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
   const location = useLocation();
 
   const goToPage = () => {
-    console.log(location.pathname)
     if (location.pathname === '/signup') {
       navigate('/');
     } else {
@@ -31,10 +29,9 @@ export default function App() {
 
 
   return (
-    <div className={location.pathname == '/' || location.pathname == '/signup' ? 'auth-page' : 'normal-page'}>
+    <div className={`${location.pathname == '/' || location.pathname == '/signup' ? 'auth-page' : 'normal-page'} min-h-screen transition-colors duration-200  dark:bg-gray-800 dark:text-white`}>
 
 
-      {console.log(location.pathname)}
       {location.pathname != '/' && location.pathname != '/signup' && <Header />}
 
 
